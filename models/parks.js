@@ -25,6 +25,17 @@ class Park {
             return err.message;
         }
     }
+
+    static async getById(p_id) {
+        try {
+            const {id, name, address, picture} = await db.one(`select id, name, address, picture from parks where id = ${p_id}`);
+            const park = new Park(id, name, address, picture);
+            console.log(park);
+            return park;
+        } catch(err) {
+            return err.message;
+        }
+    }
 }
 
 module.exports = Park;
