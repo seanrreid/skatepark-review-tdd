@@ -9,6 +9,17 @@ class User {
         this.password = password;
     }
 
+    static async getAllUsers() {
+        try {
+            const response = await db.any(`
+                select * from users
+            `);
+            return response;
+        } catch(err) {
+            return(err.message);
+        }
+    }
+
     async save() {
         try {
             const response = await db.one(`
