@@ -1,10 +1,13 @@
 const db = require('./conn.js');
 
-class Park {
-    constructor(id, name, address, picture){
+class Parks {
+    constructor(id, name, address, street, city, state, picture){
         this.id = id;
         this.name = name;
         this.address = address;
+        this.street = street;
+        this.city = city;
+        this.state = state;
         this.picture = picture;
     }
 
@@ -25,6 +28,16 @@ class Park {
             return err.message;
         }
     }
+
+    static async getById(p_id) {
+        try {
+            const response = await db.one(`select * from parks where id = ${p_id}`);
+
+            return new Parks (response.id, response.name, response.address, response.street, response.city, response.state, response.picture);
+        } catch(err) {
+            return err.message;
+        }
+    }
 }
 
-module.exports = Park;
+module.exports = Parks;

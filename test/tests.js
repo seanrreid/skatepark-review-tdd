@@ -31,6 +31,7 @@ describe('Users model tests', () => {
 describe('Parks model tests', async () => {
     it('should return a valid park instace', async () => {
         const thePark = await Parks.getById(1);
+        console.log(thePark);
         thePark.should.be.an.instanceOf(Parks);
     })
 });
