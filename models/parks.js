@@ -10,7 +10,7 @@ class Park {
 
     static async getAll() {
         try {
-            const response = await db.any(`select * from parks;`);
+            const response = await db.any(`SELECT * FROM parks;`);
             return response;
         } catch(err) {
             return err.message;
@@ -19,8 +19,18 @@ class Park {
 
     static async getParkReviews(p_id) {
         try {
-            const response = await db.any(`select * from reviews where park_id = ${p_id}`);
+            const response = await db.any(`SELECT * FROM reviews WHERE park_id = ${p_id}`);
             return response;
+        } catch(err) {
+            return err.message;
+        }
+    }
+    
+    static async getById(p_id) {
+        try {
+            const response = await db.one(`SELECT * FROM parks WHERE id = ${p_id}`);
+            const parkInstance = new Park(response.id, response.name, response.address, response.picture);
+            return parkInstance;
         } catch(err) {
             return err.message;
         }
