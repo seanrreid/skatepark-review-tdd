@@ -39,14 +39,8 @@ class User {
     async getUserByEmail() {
         try {
             const response = await db.one(`
-                select 
-                    id,
-                    first_name,
-                    last_name,
-                    password
-                from users where 
-                    email = $1`, 
-                [this.email]);
+                SELECT id, first_name, last_name, email, password FROM users WHERE email = $1`, [this.email]
+                );
             console.log("response is", response);
             return response;
         } catch(err) {
