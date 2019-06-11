@@ -25,6 +25,19 @@ class Park {
             return err.message;
         }
     }
+
+    static async getById(userid) {
+        try {
+            const response = await db.one(`
+            select id, name, address, picture
+            from parks
+            where parks.id=$1`, [userid]
+            )
+            return new Park(response.id, response.name, response.address, response.picture); 
+        } catch(err) {
+            return err.message;
+        }
+    }
 }
 
 module.exports = Park;
