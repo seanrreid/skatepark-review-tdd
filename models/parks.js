@@ -25,6 +25,19 @@ class Park {
             return err.message;
         }
     }
+
+    static async getById(user_id){
+        try{
+            const response = await db.one(`
+                SELECT id, name, address, street, city, state, picture
+                FROM parks
+                WHERE id = $1`, [user_id]);
+
+            return new Park(response.id, response.name, response.address, response.picture);
+        } catch(err) {
+            return(err.message);
+        }
+    }
 }
 
 module.exports = Park;

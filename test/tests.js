@@ -12,6 +12,7 @@ describe('Users model tests', () => {
     it('should be a valid user object', async () => {
         const userInstance = new User(null, null, null, 'derp@mcderp.com', null);
         const theUser = await userInstance.getUserByEmail();
+        console.log(theUser)
         expect(theUser).to.be.an('object');
     });
 
@@ -29,7 +30,7 @@ describe('Users model tests', () => {
 
 // Write a function to make this test pass...
 describe('Parks model tests', async () => {
-    it('should return a valid park instace', async () => {
+    it('should return a valid park instance', async () => {
         const thePark = await Parks.getById(1);
         thePark.should.be.an.instanceOf(Parks);
     })
