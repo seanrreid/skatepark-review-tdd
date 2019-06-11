@@ -5,6 +5,7 @@ const chai = require('chai'),
 chai.use(chaiAsPromised).should();
 
 const User = require('../models/users');
+const Parks = require('../models/parks');
 
 describe('Users model tests', () => {
     // Given an email addres, do we get a user object in return
@@ -24,4 +25,12 @@ describe('Users model tests', () => {
         const allUsers = await User.getAllUsers();
         expect(allUsers).to.not.be.an('undefined');
     })
-})
+});
+
+
+describe('Parks model tests', async () => {
+    it('should return a valid park instace', async () => {
+        const thePark = await Parks.getById(1);
+        thePark.should.be.an.instanceOf(Parks);
+    })
+});
